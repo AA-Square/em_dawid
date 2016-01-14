@@ -24,7 +24,9 @@ print_estimates <- function(param_list, max_param_index){
 }
 
 #import the implementation of Dawid et al. (1979) algorithm
-source("~/Documents/R_projects/em_dawid/dawid_79_em.R")
+working_dir <- getwd()
+
+source(paste(working_dir, "em_dawid79.R", sep = "/"))
 
 convergence_threshold <- 0.000001
 
@@ -59,7 +61,7 @@ print_estimates(consensus_syntheticdata, max_param_index)
 
 #---------------------------------------------------------
 # Dawid et al. (1979) data set
-setwd("~/Documents/R_projects/em_dawid/dataset")
+setwd(paste(working_dir, "dataset", sep = "/"))
 dawid_em_data <- read.table(file = "dawid_em_data.csv", header = TRUE, sep = ",", quote = "", stringsAsFactors = FALSE)
 rating_categories <- 1:4
 consensus_dawid_data<- find_consensus_rating(dawid_em_data[,-1], 
