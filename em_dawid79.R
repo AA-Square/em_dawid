@@ -235,7 +235,7 @@ find_consensus_rating <- function(data, rating_categories, num_runs, num_iter, c
                 
                 if(converged){
                     converged_to_threshold <- TRUE
-                }else if(counter == numIter & !converged){
+                }else if(counter == num_iter & !converged){
                     converged <- TRUE
                     converged_to_threshold <- FALSE
                 }
