@@ -39,6 +39,9 @@ parse_concat_ratings <- function(concat_rating){
     return(as.integer(rating_vec))
 }
 
+# if for some reason the gsubfn package could not be installed use the below function instead of parse_concat_ratings
+# to parse multiple ratings for a single object provide by a single rater
+#---------
 # parse_concat_num <- function(x){
 #     flag <- TRUE
 #     parsed_numbers <- -1
