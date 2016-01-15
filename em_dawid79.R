@@ -34,8 +34,6 @@ parse_concat_ratings <- function(concat_rating){
     #   concat_rating: concatenated ratings by a rater for the same object. i.e. "1111"
     # return:
     #   rating_vec: an integer vector of the ratings i.e. [1,1,1]
-    
-    library(gsubfn)
     pattern <- "[0-9]"
     rating_vec <- strapply(concat_rating, pattern, c)[[1]]
     return(as.integer(rating_vec))
@@ -186,8 +184,22 @@ get_max_params_index <- function(max_params_per_run){
     return(max_index)
 } 
 
+# check if the dependency package is installed
+# it is mainly used to install gsubfn package to parse multiple ratings from a single rater for the same object
+check_package_dependency <- function(required_packages){
+    cond <- required_packages %in% installed.packages()[, "Package"]
+    pack_toinstall <- required_packages[!cond]
+    if(length(pack_toinstall)){
+        install.packages(pack_toinstall)
+        load(pack_toinstall)
+    }
+}
 
 find_consensus_rating <- function(data, rating_categories, num_runs, num_iter, convergence_threshold, multiple_per_rater = FALSE){
+    # install gsubfn package in case multiple ratings from a single rater for the same object is provided
+    if(multiple_per_rater){
+        check_package_dependency(c("gsubfn"))
+    }
     raters_ratings <- count_rating_types_perrater(data, rating_categories, multiple_per_rater)
     num_raters <- ncol(data)
     num_objects <- nrow(data)
