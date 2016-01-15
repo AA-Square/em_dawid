@@ -61,8 +61,12 @@ print_estimates(consensus_syntheticdata, max_param_index)
 
 #---------------------------------------------------------
 # Dawid et al. (1979) data set
-setwd(paste(working_dir, "dataset", sep = "/"))
-dawid_em_data <- read.table(file = "dawid_em_data.csv", header = TRUE, sep = ",", quote = "", stringsAsFactors = FALSE)
+dataset_dir <- paste(working_dir, "dataset", sep = "/")
+dawid_em_data <- read.table(file = paste(dataset_dir, "dawid_em_data.csv", sep = "/"),
+                            header = TRUE,
+                            sep = ",",
+                            quote = "",
+                            stringsAsFactors = FALSE)
 rating_categories <- 1:4
 consensus_dawid_data<- find_consensus_rating(dawid_em_data[,-1], 
                                              rating_categories,
